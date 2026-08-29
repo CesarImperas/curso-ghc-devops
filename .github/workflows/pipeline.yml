@@ -1,20 +1,20 @@
-name: "Demonstração da pipeline"
+name: "Lab 02 - Uso do cron"
 on:
-  push: 
-    branches: [main]
-  workflow_dispatch:
+  schedule:
+    - cron: '40 18 * * *'
     
 jobs:
-  demonstrando-estrutura:
-    name: "Demonstrar estrutura básica"
+  schedule-job:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout do Código
         uses: actions/checkout@v4
 
-      - name: Mostrar estrutura .github/workflows
+      - name: Informações do Schedule
         run: |
-          echo "== Listagem de arquivos =="
-          ls -la .github/workflows
+          echo "== Workflow disparado por SCHEDULE =="
+          echo "Data atual: $(date)"
+          echo "Hora UTC: $(date -u)"
+          echo "Timezone: $(date +%Z)"
       
