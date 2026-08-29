@@ -34,6 +34,12 @@ Utilizamos a chave `branches` e `paths`
 
 ### Lab 04 - Workflow Trigger: Issue
 
+Automatizar ações, quando alguém interage com alguma **Issue**, de acordo com alguns tipos especificados.
+
+Útil para automatizar respostas e tratamentos em issues criadas por outros usuários, até externos do projeto (comunidade).
+
+Utilizamos a chave `issues` e `types` (`opened, edited, closed, labeled`).
+
 ---
 
 ### Lab 05 - Workflow: Jobs Paralelos
