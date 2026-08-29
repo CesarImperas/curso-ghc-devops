@@ -1,5 +1,8 @@
 name: "Lab 04 - Issues"
 
+# Conceder ao GITHUB_TOKEN a permissão necessária para criar comentários nas issues.
+permissions:
+  issues: write
 ### Executa quando issues são criadas, editadas ou fechadas.
 on:
   issues:

@@ -40,6 +40,8 @@ Automatizar ações, quando alguém interage com alguma **Issue**, de acordo com
 
 Utilizamos a chave `issues` e `types` (`opened, edited, closed, labeled`).
 
+> Lembre-se de dar permissão de escrita (`permissions: write`) ao `GITHUB_TOKEN`.
+
 ---
 
 ### Lab 05 - Workflow: Jobs Paralelos
