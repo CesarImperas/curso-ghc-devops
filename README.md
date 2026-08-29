@@ -1,4 +1,4 @@
-# Curso GitHub Actions - Prof. Ieso Dias
+u# Curso GitHub Actions - Prof. Ieso Dias
 
 > **Curso na Udemy** - [Link](https://www.udemy.com/course/github-actions-guia-completo-do-zero-ao-deploy/)
 
@@ -40,11 +40,20 @@ Automatizar ações, quando alguém interage com alguma **Issue**, de acordo com
 
 Utilizamos a chave `issues` e `types` (`opened, edited, closed, labeled`).
 
-> Lembre-se de dar permissão de escrita (`permissions: write`) ao `GITHUB_TOKEN`.
+> Lembre-se de dar permissão de escrita (`permissions: issues: write`) ao `GITHUB_TOKEN`.
 
 ---
 
 ### Lab 05 - Workflow: Jobs Paralelos
+
+Uma técnica muito utilizada para etapas que não são dependentes entre si, consigam ser executadas em **paralelo**, tornando o workflow mais eficiente.
+
+> Por padrão, os jobs são executados **paralelamente**, ou sequencial mediante dependências (`needs`).
+
+- <u>Considerações de performance</u>:
+    - Paralelizar reduz tempo crítico de **feedback** (CI), mas aumenta consumo de minutos (caso de runners hospedados).
+        - Equilibrar **tempo e custo**.
+    - Jobs muito curtos (segundos) podem sofrer mais overhead de **provisionamento** que ganho real — avaliar junção.
 
 ---
 
