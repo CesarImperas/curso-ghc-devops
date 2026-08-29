@@ -8,9 +8,11 @@ jobs:
   demonstrando-estrutura:
     name: "Demonstrar estrutura básica"
     runs-on: ubuntu-latest
+    
     steps:
       - name: Checkout do Código
         uses: actions/checkout@v4
+
       - name: Mostrar estrutura .github/workflows
         run: |
           echo "== Listagem de arquivos =="
