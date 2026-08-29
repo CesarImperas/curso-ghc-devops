@@ -26,6 +26,10 @@ Site para transformar um tempo estipulado em uma expressão cron: [Crontab Guru]
 
 ### Lab 03 - Workflow Trigger: Branch
 
+A ideia desse lab. é fazer com que o pipeline só execute a partir de mudanças e em branches **específicas**.
+
+Utilizamos a chave `branches` e `paths`
+
 ---
 
 ### Lab 04 - Workflow Trigger: Issue

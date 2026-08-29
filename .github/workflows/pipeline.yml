@@ -1,20 +1,28 @@
-name: "Lab 02 - Uso do cron"
+name: "Lab 03 - Branches e Paths"
+
+### Executa apenas em push
 on:
-  schedule:
-    - cron: '40 18 * * *'
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'src/**'
+      - 'README.md'
     
 jobs:
-  schedule-job:
+  push-job:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout do Código
         uses: actions/checkout@v4
 
-      - name: Informações do Schedule
+      - name: Informações do Push
         run: |
-          echo "== Workflow disparado por SCHEDULE =="
-          echo "Data atual: $(date)"
-          echo "Hora UTC: $(date -u)"
-          echo "Timezone: $(date +%Z)"
+          echo "== Workflow disparado por PUSH =="
+          echo "Commit: ${{ github.sha }}"
+          echo "Autor: ${{ github.actor }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Repositório: ${{ github.repository }}"
       
