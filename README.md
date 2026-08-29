@@ -59,7 +59,30 @@ Uma técnica muito utilizada para etapas que não são dependentes entre si, con
 
 ### Lab 06 - Workflow: Matrix Strategy
 
----
+Uma estratégia do GitHub Actions que permite executar o mesmo job várias vezes (paralelamente), utilizando diferentes combinações de configurações definidas em uma matriz (matrix).
+
+Elas podem ser visualizadas na aba de Actions, no repositório.
+
+> Útil para testar aplicações em diferentes versões, sistemas operacionais, ambientes ou configurações, sem precisar duplicar o job no workflow.
+
+Por exemplo, uma matriz pode combinar:
+```YAML
+runs-on: ${{ matrix.os }}
+strategy:
+    fail-fast: false # Não para se um job falhar
+    matrix:
+    os: [ubuntu-latest, windows-latest]
+    node: [20, 22]
+```
+Podemos ter flags para **incluir** uma configuração específica (`include`), ou **excluir** combinações problemáticas (`exclude`).
+
+Isso gera 4 execuções automaticamente:
+- Ubuntu + Node 20
+- Ubuntu + Node 22
+- Windows + Node 20
+- Windows + Node 22
+
+**Ideia principal**: definir as variações uma vez e deixar o GitHub Actions gerenciar as execuções.
 
 ### Lab 07 - Workflow: Steps condicionais
 
