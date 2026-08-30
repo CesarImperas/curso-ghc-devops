@@ -4,6 +4,12 @@
 
 > Material no **Notion**!
 
+## Sobre o Curso
+
+O curso **GitHub Actions: Guia Completo - Do Zero ao Deploy** oferece uma formação prática e abrangente sobre automação de CI/CD usando GitHub Actions. Você aprenderá desde os conceitos fundamentais ate a implementação de pipelines completas de deploy em produção.
+
+> **Repositório** com os laboratórios respondidos - [Link](https://github.com/iesodias/ghc-repo)
+
 ## Labs. - Colocando em Prática
 
 ### Lab 01 - Estrutura dos Workflows
@@ -21,6 +27,13 @@ Utilizamos a chave `cron`, aninhado ao tipo `schedule`, para determinar um tempo
 Site para transformar um tempo estipulado em uma expressão cron: [Crontab Guru](https://crontab.guru/)
 
 **Expressão**: `minute hour day month weekday`
+
+Possíveis causas para o schedule não ter sido executado:
+- **Repositório privado** => Schedule não funciona
+- **Branch diferente de main** => Schedule não funciona  
+- **Sintaxe cron errada** => Verifique em [crontab.guru](https://crontab.guru)
+- **Horário UTC/Brasília** => GitHub usa UTC, ajustar +3 horas
+- **Delay do GitHub** => Pode atrasar até 10-15 minutos
 
 ---
 
@@ -106,11 +119,25 @@ Uso da propriedade `env`, e os nomes das variáveis em MAIÚSCULO e `snake_case`
 **Níveis**:
 1. <u>Workflow</u> - nível global;
 2. <u>Jobs</u> - válidas apenas naquele bloco de execução;
-3. Steps - válidas apenas naquele comando específico.
+3. <u>Steps</u> - válidas apenas naquele comando específico.
+
+**Precedência de variáveis**: Se você definir uma variável com o mesmo nome em diferentes níveis, a ordem de precedência é:
+1. **Step** (maior prioridade)
+2. **Job**
+3. **Workflow** (menor prioridade)
 
 ---
 
 ### Lab 09 - Workflow: GitHub Secrets
+
+Um recurso especial para **proteger informações sensíveis** dentro do workflow.
+
+Definimos as informações no próprio repositório (na aba de "Settings" e na seção "Security and quality" -> "Actions").
+- Podemos incluir dados como segredos (_secrets_) ou propriamente variáveis (_variables_).
+    - <u>Secrets</u>: Para dados sensíveis, são mascarados nos logs, não podem ser lidos após criação. Referenciamos por meio do objeto `secrets.<name>`.
+    - <u>Variables</u>: Para configurações não sensíveis, são visíveis nos logs, podem ser lidas
+
+> Mesmo que você tente imprimir o valor segredo, o GitHub mascara automaticamente.
 
 ---
 
