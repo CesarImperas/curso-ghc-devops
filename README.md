@@ -132,16 +132,48 @@ Uso da propriedade `env`, e os nomes das variáveis em MAIÚSCULO e `snake_case`
 
 Um recurso especial para **proteger informações sensíveis** dentro do workflow.
 
-Definimos as informações no próprio repositório (na aba de "Settings" e na seção "Security and quality" -> "Actions").
+Definimos as informações no próprio repositório (na aba de "Settings" e na seção "Security and quality" -> "Actions" -> "Repository secrets").
 - Podemos incluir dados como segredos (_secrets_) ou propriamente variáveis (_variables_).
     - <u>Secrets</u>: Para dados sensíveis, são mascarados nos logs, não podem ser lidos após criação. Referenciamos por meio do objeto `secrets.<name>`.
     - <u>Variables</u>: Para configurações não sensíveis, são visíveis nos logs, podem ser lidas
 
 > Mesmo que você tente imprimir o valor segredo, o GitHub mascara automaticamente.
 
+Você não consegue visualizar um valor definido como segredo, e sim, somente **atualizá-lo** (_update_).
+
 ---
 
 ### Lab 10 - Workflow: Variáveis multi-ambiente
+
+Entender como funciona as **variáveis de repositório** e **variáveis de ambiente específicas** (configuradas por environment como `dev`, `staging` e `production`).
+
+> Clicaremos na aba de "Variables", e não "Secrets".
+
+**Importante**: variáveis de repositório são acessíveis em todos os workflows e jobs, mas podem ser sobrescritas por variáveis de ambiente específicas.
+- Deixamos explícito qual ambiente queremos executar determinado job, por meio da propriedade `environment`. 
+
+Lembre-se de definir as variáveis no repositório, por **ambiente**.
+- Por ambiente, clicamos na seção de "Manage environment variables" -> "New environment". 
+
+Quando há variáveis com o mesmo nome, a precedência é:
+1. **Variáveis de Environment** (mais alta prioridade)
+2. **Variáveis de Repositório** (prioridade média)
+3. **Variáveis de Organização** (prioridade baixa)
+
+**Exemplo prático:**
+- Se você criar `DEFAULT_REGION` como variável de repositório com valor `us-east-1`
+- E criar `DEFAULT_REGION` no environment `production` com valor `eu-west-1`
+- O job usando `environment: production` vai usar `eu-west-1` (sobrescreve)
+
+#### Proteções de Environment
+
+Os environments permitem configurar:
+- **Required reviewers:** Aprovação manual antes do deploy
+- **Wait timer:** Atraso antes de iniciar o deploy
+- **Deployment branches:** Restringir quais branches podem fazer deploy
+- **Environment secrets:** Secrets específicos por ambiente (além de variáveis)
+
+Essas proteções são essenciais em ambientes de produção!
 
 ---
 
