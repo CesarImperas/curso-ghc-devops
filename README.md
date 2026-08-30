@@ -99,6 +99,15 @@ Não só isso, como também condições no disparo daquele workflow, na propried
 
 ### Lab 08 - Workflow: Variáveis
 
+Nesse lab. vamos utilizar das **variáveis de ambiente**, um mecanismo para evitar a repetição de valores no workflow, e ter o maior controle deles.
+
+Uso da propriedade `env`, e os nomes das variáveis em MAIÚSCULO e `snake_case` (no formato `chave: valor`).
+
+**Níveis**:
+1. <u>Workflow</u> - nível global;
+2. <u>Jobs</u> - válidas apenas naquele bloco de execução;
+3. Steps - válidas apenas naquele comando específico.
+
 ---
 
 ### Lab 09 - Workflow: GitHub Secrets
