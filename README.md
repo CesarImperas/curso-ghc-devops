@@ -1,4 +1,4 @@
-u# Curso GitHub Actions - Prof. Ieso Dias
+# Curso GitHub Actions - Prof. Ieso Dias
 
 > **Curso na Udemy** - [Link](https://www.udemy.com/course/github-actions-guia-completo-do-zero-ao-deploy/)
 
@@ -86,9 +86,14 @@ Isso gera 4 execuções automaticamente:
 
 > **Documentação**: [Matrix](https://docs.github.com/pt/actions/how-tos/write-workflows/choose-what-workflows-do/run-job-variations) e [Concorrência](https://docs.github.com/pt/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency)
 
-### Lab 07 - Workflow: Steps condicionais
+### Lab 07 - Workflow: Steps Condicionais
 
+Controlar qual step roda, com base num comando condicional `if`.
 
+Não só isso, como também condições no disparo daquele workflow, na propriedade `workflow_dispatch`. Utilizando uma entrada para valores que o usuário pode enviar (por meio dos `inputs`).
+- Assim, é possível controlar algumas condições ou jobs a serem executados, ou não, além de escolher um ambiente, por exemplo.
+
+> Útil quando manipulamos valores definidos como variáveis do ambiente, ou do próprio objeto `github`, como `github.event` ou `github.ref` por exemplo.
 
 ---
 
