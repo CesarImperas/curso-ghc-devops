@@ -69,7 +69,7 @@ Por exemplo, uma matriz pode combinar:
 ```YAML
 runs-on: ${{ matrix.os }}
 strategy:
-    fail-fast: false # Não para se um job falhar
+    fail-fast: false # Não para se um job falhar (o padrão é true)
     matrix:
     os: [ubuntu-latest, windows-latest]
     node: [20, 22]
@@ -84,7 +84,11 @@ Isso gera 4 execuções automaticamente:
 
 **Ideia principal**: definir as variações uma vez e deixar o GitHub Actions gerenciar as execuções.
 
+> **Documentação**: [Matrix](https://docs.github.com/pt/actions/how-tos/write-workflows/choose-what-workflows-do/run-job-variations) e [Concorrência](https://docs.github.com/pt/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency)
+
 ### Lab 07 - Workflow: Steps condicionais
+
+
 
 ---
 
