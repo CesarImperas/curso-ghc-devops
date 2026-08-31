@@ -101,7 +101,8 @@ jobs:
       # Função startsWith() - Verifica início da string
       - name: Ação apenas para feature branches
         if: startsWith(github.ref, 'refs/heads/feature/')
-        run: echo "Branch de feature detectado: ${{ github.ref_name }}"
+        run: | 
+          echo "Branch de feature detectado: ${{ github.ref_name }}"
 
       # Função endsWith() - Verifica fim da string
       - name: Verificar se commit termina com número
