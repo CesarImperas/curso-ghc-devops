@@ -178,3 +178,82 @@ Essas proteções são essenciais em ambientes de produção!
 ---
 
 ### Lab 11 - Workflow: Contexto e Expressões
+
+Agora, podemos deixar a pipeline mais **inteligente** e **dinâmica**.
+- Acessando informações sobre o repositório, ambiente de execução, status de jobs e outputs de steps.
+- Além de usar funções como `contains()` e `format()`.
+
+> Perceba no arquivo de workflow deste lab., o uso da propriedade `id` para referenciar steps de um job, e as variáveis salvas em `GITHUB_OUTPUT`.
+
+Podemos reusar dados de um step em outro step diferente, dentro de um mesmo job.
+
+#### Principais Contextos Disponíveis:
+
+| Contexto | Quando Usar | Exemplo |
+|----------|-------------|---------|
+| **github** | Informações do repositório, evento, commit, PR | `${{ github.repository }}`, `${{ github.actor }}` |
+| **runner** | Informações do ambiente de execução | `${{ runner.os }}`, `${{ runner.arch }}` |
+| **job** | Status do job atual | `${{ job.status }}` |
+| **steps** | Outputs de steps anteriores | `${{ steps.meu-step.outputs.valor }}` |
+| **needs** | Outputs e resultados de jobs anteriores | `${{ needs.outro-job.outputs.versao }}` |
+| **env** | Variáveis de ambiente | `${{ env.MINHA_VAR }}` |
+| **secrets** | Secrets do repositório | `${{ secrets.API_KEY }}` |
+
+#### Funções Úteis de Expressões:
+
+```yaml
+# contains() - Verifica se contém texto
+if: contains(github.ref, 'feature')
+if: contains(github.event.head_commit.message, '[skip ci]')
+
+# startsWith() - Verifica início
+if: startsWith(github.ref, 'refs/heads/release/')
+
+# endsWith() - Verifica fim
+if: endsWith(github.ref, '/main')
+
+# format() - Formata strings
+run: echo "${{ format('Versão {0} em {1}', env.VERSION, env.ENV) }}"
+
+# toJSON() - Converte para JSON (ótimo para debug)
+run: echo '${{ toJSON(github) }}'
+run: echo '${{ toJSON(steps) }}'
+
+# join() - Junta arrays
+run: echo "${{ join(github.event.commits.*.message, ', ') }}"
+
+# fromJSON() - Parse JSON
+env:
+  CONFIG: ${{ fromJSON('{"env":"prod","debug":false}') }}
+```
+
+#### Casos de Uso Práticos:
+
+1. **Nomear artefatos com informações dinâmicas:**
+```yaml
+name: app-${{ github.ref_name }}-${{ github.run_number }}-${{ github.sha }}
+```
+
+2. **Deploy apenas em horário comercial (9h-18h UTC):**
+```yaml
+if: github.event_name == 'push' && github.ref == 'refs/heads/main' &&
+    github.event.head_commit.timestamp >= '09:00' &&
+    github.event.head_commit.timestamp <= '18:00'
+```
+
+3. **Pular CI se commit contém [skip ci]:**
+```yaml
+if: "!contains(github.event.head_commit.message, '[skip ci]')"
+```
+
+4. **Executar step apenas no primeiro commit do dia:**
+```yaml
+if: github.run_number == 1
+```
+
+5. **Notificar falhas apenas em branches importantes:**
+```yaml
+if: |
+  failure() &&
+  (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
+```
